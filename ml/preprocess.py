@@ -77,6 +77,6 @@ for file in DATA_DIR.glob("*_Rarm.csv"):
 combined_df = pd.concat(alldfs, axis=0, ignore_index=True)
 
 print(combined_df.head())
-
+print(combined_df.tail())
 print("Shape:", combined_df.shape)
 
