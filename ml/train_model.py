@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
+import joblib
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 features_df = pd.read_csv(DATA_DIR / "features.csv")
@@ -35,6 +36,10 @@ y_test = test_df["label"]
 # Scaling is learned only from the training data.
 model = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000))
 model.fit(X_train, y_train)
+
+joblib.dump(model, DATA_DIR / "formiq_model.joblib")
+joblib.dump(feature_columns, DATA_DIR / "feature_columns.joblib")
+
 predictions = model.predict(X_test)
 
 
